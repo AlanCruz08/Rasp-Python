@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1231,
+        "ultimo_valor": 23,
+        "fecha": "27/01/22",
+        "hora": "22:33",
+        "sensor": {
+            "id": 1212,
+            "nombre": "Temperatura",
+            "key": "DHTH001",
+            "type": "DHT11",
+            "leer": "arduino",
+            "unidades": "ºC",
+            "descripcion":"sensor en el salon 1",
+            "id_dispositivo": 654344
+        }
+    },
+    {
+        "id": 1232,
+        "ultimo_valor": 50,
+        "fecha": "27/01/22",
+        "hora": "22:33",
+        "sensor": {
+            "id": 1213,
+            "nombre": "Distancia",
+            "key": "DHTH201",
+            "type": "DHT12",
+            "leer": "arduino",
+            "unidades": "cm",
+            "descripcion":"sensor en el salon 1",
+            "id_dispositivo": 654344
+        }
+    }
+]
