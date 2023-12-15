@@ -184,22 +184,40 @@ class SensoresArduino:
 
             if opcion == '1':
                 self.distancia()
+                self.volver_menu()
                 
             elif opcion == '2':
                self.movimiento()
+               self.volver_menu()
             elif opcion == '3':
                 self.humedad()
+                self.volver_menu()
             elif opcion == '4':
                self.temperatura()
+               self.volver_menu()
             elif opcion == '5':
                 self.sonido()
+                self.volver_menu()
             elif opcion == '6':
                 while True:
                     self.obtener_todos_los_sensores()
+                    self.volver_menu()
                     break
             elif opcion == '7':
                 print("Saliendo del programa...")
                 break
+            else:
+                print("Opción no válida. Intente de nuevo.")
+
+    
+    def volver_menu(self):
+        while True:
+            decision = input("Presione 'M' para volver al Menú o 'S' para salir: ").upper()
+            if decision == 'M':
+                break  # Sale del bucle y vuelve al menú principal
+            elif decision == 'S':
+                print("Saliendo del programa...")
+                exit()  # Sale del programa
             else:
                 print("Opción no válida. Intente de nuevo.")
 
@@ -252,6 +270,8 @@ if __name__ == "__main__":
         
     except KeyboardInterrupt:
         conexion_arduino.cerrar_conexion()
+
+    
 
 
 
