@@ -209,15 +209,15 @@ class SensoresArduino:
             else:
                 print("Opción no válida. Intente de nuevo.")
 
-    
     def volver_menu(self):
         while True:
             decision = input("Presione 'M' para volver al Menú o 'S' para salir: ").upper()
             if decision == 'M':
-                break  # Sale del bucle y vuelve al menú principal
+                print("Volviendo al Menú...")
+                return  # Regresa a la función que llamó a volver_menu()
             elif decision == 'S':
                 print("Saliendo del programa...")
-                exit()  # Sale del programa
+                break  # Sale del bucle de volver_menu()
             else:
                 print("Opción no válida. Intente de nuevo.")
 
