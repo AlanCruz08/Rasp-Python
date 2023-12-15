@@ -183,8 +183,8 @@ class SensoresArduino:
             opcion = input("Ingrese el número del sensor que desea consultar o '7' para salir: ")
 
             if opcion == '1':
+                self.opcion_volver_menu()  
                 self.distancia()
-                self.opcion_volver_menu()  # Llama a la función para dar la opción de volver al menú
             elif opcion == '2':
                 self.movimiento()
                 self.opcion_volver_menu()
