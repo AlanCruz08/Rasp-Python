@@ -169,7 +169,7 @@ class SensoresArduino:
     
 
 
-    def mostrar_menu(self):
+""" def mostrar_menu(self):
         while True:
             print("\n--- Menú de Sensores ---")
             print("1. Ver Distancia")
@@ -225,8 +225,74 @@ class SensoresArduino:
                 }
                 self.datosArduino.crear(datos)
                 self.datosArduino.guardar()
-                    #self.buscar_sensor(sku, tipo, sensores_vistos, nSensor, valor)
+                    #self.buscar_sensor(sku, tipo, sensores_vistos, nSensor, valor)"""
+def mostrar_menu(self):
+    while True:
+        print("\n--- Menú de Sensores ---")
+        print("1. Ver Distancia")
+        print("2. Ver Movimiento")
+        print("3. Ver Humedad")
+        print("4. Ver Temperatura")
+        print("5. Ver Sonido")
+        print("6. Ver todos los datos")
+        print("7. Salir")
 
+        opcion = input("Ingrese el número del sensor que desea consultar o '7' para salir: ")
+
+        if opcion == '1':
+            self.distancia()
+        elif opcion == '2':
+            self.movimiento()
+        elif opcion == '3':
+            self.humedad()
+        elif opcion == '4':
+            self.temperatura()
+        elif opcion == '5':
+            self.sonido()
+        elif opcion == '6':
+            self.obtener_todos_los_sensores()
+            input("Presione Enter para volver al menú...")
+        elif opcion == '7':
+            print("Saliendo del programa...")
+            break
+        else:
+            print("Opción no válida. Intente de nuevo.")
+
+def obtener_todos_los_sensores(self):
+    sensores_vistos = set()
+    tipos_sensores = ['DIS:', 'SM:', 'SH:', 'ST:', 'SS:']
+    while True:
+        for tipo_sensor in tipos_sensores:
+            datos_sensor = self.read_sensor(tipo_sensor)
+            if datos_sensor:
+                tipo = datos_sensor[0]
+                nSensor = datos_sensor[1]
+                valor = datos_sensor[2]
+                print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
+                datos =  {
+                    'tipo': tipo,
+                    'nSensor': nSensor,
+                    'valor': valor,
+                }
+                self.datosArduino.crear(datos)
+                self.datosArduino.guardar()
+        input("Presione Enter para volver al menú...")
+        break
+
+
+
+"""if __name__ == "__main__":
+    conexion_arduino = ConexionArduino()
+    datos = Datos()
+
+    try:
+        sensores = SensoresArduino(conexion_arduino)
+        sensores.obtener_todos_los_sensores()
+        sensores.mostrar_menu()
+        datos.guardar()
+        
+    except KeyboardInterrupt:
+        conexion_arduino.cerrar_conexion()"""
 
 if __name__ == "__main__":
     conexion_arduino = ConexionArduino()
@@ -234,7 +300,6 @@ if __name__ == "__main__":
 
     try:
         sensores = SensoresArduino(conexion_arduino)
-        sensores.obtener_todos_los_sensores()
         sensores.mostrar_menu()
         datos.guardar()
         
