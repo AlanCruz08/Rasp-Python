@@ -184,42 +184,39 @@ class SensoresArduino:
 
             if opcion == '1':
                 self.distancia()
-                self.volver_menu()
-                
+                self.opcion_volver_menu()  # Llama a la función para dar la opción de volver al menú
             elif opcion == '2':
-               self.movimiento()
-               self.volver_menu()
+                self.movimiento()
+                self.opcion_volver_menu()
             elif opcion == '3':
                 self.humedad()
-                self.volver_menu()
+                self.opcion_volver_menu()
             elif opcion == '4':
-               self.temperatura()
-               self.volver_menu()
+                self.temperatura()
+                self.opcion_volver_menu()
             elif opcion == '5':
                 self.sonido()
-                self.volver_menu()
+                self.opcion_volver_menu()
             elif opcion == '6':
-                while True:
-                    self.obtener_todos_los_sensores()
-                    self.volver_menu()
-                    break
+                self.obtener_todos_los_sensores()
+                self.opcion_volver_menu()
             elif opcion == '7':
                 print("Saliendo del programa...")
                 break
             else:
                 print("Opción no válida. Intente de nuevo.")
 
-    def volver_menu(self):
+    def opcion_volver_menu(self):
         while True:
             decision = input("Presione 'M' para volver al Menú o 'S' para salir: ").upper()
             if decision == 'M':
-                print("Volviendo al Menú...")
-                return  # Regresa a la función que llamó a volver_menu()
+                break  # Sale del bucle y vuelve al menú principal
             elif decision == 'S':
                 print("Saliendo del programa...")
-                break  # Sale del bucle de volver_menu()
+                exit()  # Sale del programa
             else:
                 print("Opción no válida. Intente de nuevo.")
+
 
     def obtener_todos_los_sensores(self):
         
