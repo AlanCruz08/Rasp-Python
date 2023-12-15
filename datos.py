@@ -61,8 +61,10 @@ class SensoresArduino:
                     'nSensor': nSensor,
                     'valor': valor
                 }
+
                 self.datosArduino.crear(datos)
                 self.datosArduino.guardar()
+                self.opcion_volver_menu()
                 
                 #self.buscar_sensor(sku, tipo, sensores_vistos, nSensor, valor)
             else:
@@ -183,8 +185,8 @@ class SensoresArduino:
             opcion = input("Ingrese el número del sensor que desea consultar o '7' para salir: ")
 
             if opcion == '1':
-                self.opcion_volver_menu()  
                 self.distancia()
+                self.opcion_volver_menu()  
             elif opcion == '2':
                 self.movimiento()
                 self.opcion_volver_menu()
