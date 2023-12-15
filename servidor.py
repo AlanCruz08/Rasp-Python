@@ -2,7 +2,7 @@ import json
 import requests
 
 # Ruta al archivo JSON en tu proyecto
-json_file_path = '/ruta/al/archivo.json'
+json_file_path = 'Datos.json'
 
 # Lee el contenido del archivo JSON
 with open(json_file_path, 'r') as file:
