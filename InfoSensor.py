@@ -31,14 +31,14 @@ class InfoSensor(Lista):
         return info_dict
 
     def convertir_lista_objeto(self, diccionario):
-        for funcion in diccionario:
-            fun = self.convertir_objeto(funcion)
-            self.lista.append(fun)
+        for infoSen in diccionario:
+            infoSen = self.convertir_objeto(infoSen)
+            self.lista.append(infoSen)
         return self
 
-    def convertir_objeto(self, funcion):
-        fun = Funcion(funcion["pelicula"], funcion["hora"], funcion["precio"])
-        return fun
+    def convertir_objeto(self, infoSen):
+        infoSen = InfoSensor(infoSen["tipo"], infoSen["nombre"], infoSen["unidades"])
+        return infoSen
 
     def cargar(self):
         datos = self.importar_desde_json(self.filename)

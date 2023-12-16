@@ -8,7 +8,6 @@ def get_id():
 class Sensor(Lista):
 
     def __init__(self, key = "", read = "", descripcion ="", data = [], device = None):
-        super().__init__()
         self.id = get_id()
         self.key = key
         self.read = read
