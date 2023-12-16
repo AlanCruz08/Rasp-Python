@@ -186,7 +186,7 @@ class SensoresArduino:
             print("7. Enviar datos al servidor")
             print("8. Salir")
 
-            opcion = input("Ingrese el número del sensor que desea consultar o '7' para salir: ")
+            opcion = input("Ingrese el número del sensor que desea consultar o '8' para salir: ")
 
             if opcion == '1':
                 self.distancia()
@@ -205,7 +205,7 @@ class SensoresArduino:
                     break
             elif opcion == '7':
                 self.conexion_servidor()
-                
+                break
             elif opcion == '8':
                 print("Saliendo del programa...")
                 break
