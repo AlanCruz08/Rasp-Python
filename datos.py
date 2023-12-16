@@ -74,7 +74,7 @@ class SensoresArduino:
                 print("No hay datos disponibles para el sensor de distancia")
             
             # Verifica si se presiona la tecla 'q' para salir del bucle
-            if keyboard.is_pressed('q'):
+            if keyboard.is_pressed('t'):
                 break
     
 
