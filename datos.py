@@ -64,7 +64,6 @@ class SensoresArduino:
 
                 self.datosArduino.crear(datos)
                 self.datosArduino.guardar()
-                self.opcion_volver_menu()
                 
                 #self.buscar_sensor(sku, tipo, sensores_vistos, nSensor, valor)
             else:
