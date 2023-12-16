@@ -10,14 +10,15 @@ def mandarDatos():
         json_data = json.load(file)
 
     # Define la URL de la API a la que deseas realizar la solicitud POST
-    #api_url = "http://3.129.244.114/api/carga"
-    api_url = "http://127.0.0.1:8000/api/carga"
+    api_url = "http://3.129.244.114/api/carga"
+    # conexion api local
+    #api_url = "http://127.0.0.1:8000/api/carga"
 
     try:
         print(json_data)
         # Realiza una solicitud POST a la API con el archivo JSON como body
         response = requests.post(api_url, json=json_data)
-        print(response.json())
+        #print(response.json())
         # Verifica si la solicitud fue exitosa (código de estado 2xx)
         if response.status_code // 100 == 2:
             # Imprime la respuesta en formato JSON
