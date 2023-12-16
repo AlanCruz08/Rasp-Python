@@ -1,6 +1,7 @@
 from conexion import ConexionArduino
 import time
 from datosArduono import Datos
+from servidor import mandarDatos
 #import datetime
 
 
@@ -43,6 +44,10 @@ class SensoresArduino:
             
         return sensor_encontrado if sensor_encontrado else None"""
         
+    def conexion_servidor(self):
+        mandarDatos()
+
+
 
     
     def distancia(self):
@@ -61,7 +66,6 @@ class SensoresArduino:
                     'nSensor': nSensor,
                     'valor': valor
                 }
-
                 self.datosArduino.crear(datos)
                 self.datosArduino.guardar()
                 
@@ -179,45 +183,34 @@ class SensoresArduino:
             print("4. Ver Temperatura")
             print("5. Ver Sonido")
             print("6. Ver todos los datos")
-            print("7. Salir")
+            print("7. Enviar datos al servidor")
+            print("8. Salir")
 
             opcion = input("Ingrese el número del sensor que desea consultar o '7' para salir: ")
 
             if opcion == '1':
                 self.distancia()
-                self.opcion_volver_menu()  
+                
             elif opcion == '2':
-                self.movimiento()
-                self.opcion_volver_menu()
+               self.movimiento()
             elif opcion == '3':
                 self.humedad()
-                self.opcion_volver_menu()
             elif opcion == '4':
-                self.temperatura()
-                self.opcion_volver_menu()
+               self.temperatura()
             elif opcion == '5':
                 self.sonido()
-                self.opcion_volver_menu()
             elif opcion == '6':
-                self.obtener_todos_los_sensores()
-                self.opcion_volver_menu()
+                while True:
+                    self.obtener_todos_los_sensores()
+                    break
             elif opcion == '7':
+                self.conexion_servidor()
+                
+            elif opcion == '8':
                 print("Saliendo del programa...")
                 break
             else:
                 print("Opción no válida. Intente de nuevo.")
-
-    def opcion_volver_menu(self):
-        while True:
-            decision = input("Presione 'M' para volver al Menú o 'S' para salir: ").upper()
-            if decision == 'M':
-                break  # Sale del bucle y vuelve al menú principal
-            elif decision == 'S':
-                print("Saliendo del programa...")
-                exit()  # Sale del programa
-            else:
-                print("Opción no válida. Intente de nuevo.")
-
 
     def obtener_todos_los_sensores(self):
         
@@ -268,8 +261,6 @@ if __name__ == "__main__":
         
     except KeyboardInterrupt:
         conexion_arduino.cerrar_conexion()
-
-    
 
 
 
