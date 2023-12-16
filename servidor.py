@@ -10,17 +10,14 @@ def mandarDatos():
         json_data = json.load(file)
 
     # Define la URL de la API a la que deseas realizar la solicitud POST
-    api_url = "http://3.142.148.71/api/carga"
-
-    header = {
-        "Token": "tokenjosjoijdsoidj"
-    }
+    #api_url = "http://3.129.244.114/api/carga"
+    api_url = "http://127.0.0.1:8000/api/carga"
 
     try:
         print(json_data)
         # Realiza una solicitud POST a la API con el archivo JSON como body
-        response = requests.post(api_url, headers=header, json=json_data)
-        print(response)
+        response = requests.post(api_url, json=json_data)
+        print(response.json())
         # Verifica si la solicitud fue exitosa (código de estado 2xx)
         if response.status_code // 100 == 2:
             # Imprime la respuesta en formato JSON
@@ -32,7 +29,7 @@ def mandarDatos():
 
     except requests.exceptions.RequestException as e:
         # Captura y maneja excepciones relacionadas con la solicitud
-        print(f"Error de solicitud: {e}")
+        print(f"Error de solicitud: {e}")
 
 
 if __name__ == '__main__':
