@@ -2,6 +2,7 @@ from conexion import ConexionArduino
 import time
 from datosArduono import Datos
 from servidor import mandarDatos
+import keyboard
 #import datetime
 
 
@@ -51,7 +52,6 @@ class SensoresArduino:
 
     
     def distancia(self):
-        #sku = self.SensoresData.obtener_Sensores()
         sensores_vistos = set()  # Almacena los sensores ya mostrados
 
         while True:
@@ -61,7 +61,7 @@ class SensoresArduino:
                 nSensor = data[1]
                 valor = data[2]
                 print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
-                datos =  {
+                datos = {
                     'tipo': tipo,
                     'nSensor': nSensor,
                     'valor': valor
@@ -72,6 +72,10 @@ class SensoresArduino:
                 #self.buscar_sensor(sku, tipo, sensores_vistos, nSensor, valor)
             else:
                 print("No hay datos disponibles para el sensor de distancia")
+            
+            # Verifica si se presiona la tecla 'q' para salir del bucle
+            if keyboard.is_pressed('q'):
+                break
     
 
     def movimiento(self):
