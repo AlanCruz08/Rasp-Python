@@ -25,6 +25,58 @@ class DatosInterfaz:
         mandarDatos()
         print("Datos enviados al servidor")
 
+    def mostrar_menu(self):
+        while True:
+            print("\n--- Menú de Sensores ---")
+            print("1. Ver Distancia")
+            print("2. Ver Movimiento")
+            print("3. Ver Humedad")
+            print("4. Ver Temperatura")
+            print("5. Ver Sonido")
+            print("6. Ver todos los datos")
+            print("7. Salir")
+
+            opcion = input("Ingrese el número del sensor que desea consultar o '7' para salir: ")
+
+            if opcion == '1':
+                self.distancia()
+            elif opcion == '2':
+                self.movimiento()
+            elif opcion == '3':
+                self.humedad()
+            elif opcion == '4':
+                self.temperatura()
+            elif opcion == '5':
+                self.sonido()
+            elif opcion == '6':
+                while True:
+                    self.obtener_todos_los_sensores()
+                    break
+            elif opcion == '7':
+                print("Saliendo del programa...")
+                break
+            else:
+                print("Opción no válida. Intente de nuevo.")
+
+    def obtener_todos_los_sensores(self):
+        tipos_sensores = ['DIS:', 'SM:', 'SH:', 'ST:', 'SS:']
+        while True:
+            for tipo_sensor in tipos_sensores:
+                datos_sensor = self.read_sensor(tipo_sensor)
+                if datos_sensor:
+                    tipo = datos_sensor[0]
+                    nSensor = datos_sensor[1]
+                    valor = datos_sensor[2]
+                    print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
+                    datos = {
+                        'tipo': tipo,
+                        'nSensor': nSensor,
+                        'valor': valor,
+                    }
+
+                self.datosArduino.crear(datos)
+                self.datosArduino.guardar()
+    
     def distancia(self):
         while True:
             data = self.read_sensor('DIS:')
@@ -116,64 +168,6 @@ class DatosInterfaz:
                 self.datosArduino.guardar()
             else:
                 print("No hay datos disponibles para el sensor de Sonido")
-
-    def mostrar_menu(self):
-        while True:
-            print("\n--- Menú de Sensores ---")
-            print("1. Ver Distancia")
-            print("2. Ver Movimiento")
-            print("3. Ver Humedad")
-            print("4. Ver Temperatura")
-            print("5. Ver Sonido")
-            print("6. Ver todos los datos")
-            print("7. Enviar datos al servidor")
-            print("8. Salir")
-
-            opcion = input(
-                "Ingrese el número del sensor que desea consultar o '8' para salir: ")
-
-            if opcion == '1':
-                self.distancia()
-            elif opcion == '2':
-                self.movimiento()
-            elif opcion == '3':
-                self.humedad()
-            elif opcion == '4':
-                self.temperatura()
-            elif opcion == '5':
-                self.sonido()
-            elif opcion == '6':
-                while True:
-                    self.obtener_todos_los_sensores()
-                    break
-            elif opcion == '7':
-                self.conexion_servidor()
-                break
-            elif opcion == '8':
-                print("Saliendo del programa...")
-                break
-            else:
-                print("Opción no válida. Intente de nuevo.")
-
-    def obtener_todos_los_sensores(self):
-        tipos_sensores = ['DIS:', 'SM:', 'SH:', 'ST:', 'SS:']
-        while True:
-            for tipo_sensor in tipos_sensores:
-                datos_sensor = self.read_sensor(tipo_sensor)
-                if datos_sensor:
-                    tipo = datos_sensor[0]
-                    nSensor = datos_sensor[1]
-                    valor = datos_sensor[2]
-                    print(
-                        f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
-                    datos = {
-                        'tipo': tipo,
-                        'nSensor': nSensor,
-                        'valor': valor,
-
-                    }
-                self.datosArduino.crear(datos)
-                self.datosArduino.guardar()
 
 
 if __name__ == "__main__":

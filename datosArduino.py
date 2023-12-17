@@ -19,11 +19,11 @@ class DatosArduino(Lista):
         return f'{str(self.tipo).ljust(5)} \t\t\t| {self.nSensor.ljust(5)} \t\t\t| {self.valor.ljust(5)}'
 
     def guardar(self):
+        exportarJson.guardar(self.Diccionario(), self.archivo)
+
         if self.is_connected_to_internet():
             mandarDatos()
             exportarJson.guardar([], self.archivo)
-        else:
-            exportarJson.guardar(self.Diccionario(), self.archivo)
 
     def is_connected_to_internet(self):
         try:
