@@ -1,17 +1,14 @@
 from conexion import ConexionArduino
-import time
-from datosArduono import Datos
+from datosArduino import DatosArduino
 from servidor import mandarDatos
-#import datetime
+import time
 
 
-
-
-class SensoresArduino:
+class DatosInterfaz:
     def __init__(self, conexion):
         self.conexion = conexion
-        self.datosArduino = Datos()
-    
+        self.datosArduino = DatosArduino()
+
     def read_sensor(self, sensor):
         while True:
             arduino_data = self.conexion.leer_dato()
@@ -19,39 +16,16 @@ class SensoresArduino:
                 if arduino_data.startswith(sensor):
                     sensor_values = arduino_data.split(':')
                     if len(sensor_values) >= 2:
-                        #self.datosArduino.guardar()
                         return sensor_values
                     else:
-                        print(f"Error: Datos incompletos recibidos para {sensor}")
-            
+                        print(
+                            f"Error: Datos incompletos recibidos para {sensor}")
 
-     
-    """def buscar_sensor(self, datos_arduino, tipo, sensores_vistos, nSensor, valor):
-        sensor_encontrado = next((sensor for sensor in datos_arduino if tipo == sensor.sku ), None)
-        if sensor_encontrado == next((sensor for sensor in datos_arduino if tipo == sensor.sku ), None):
-            fecha_actual = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Obtener la fecha y hora actual
-            print(f"SKU: {sensor_encontrado.sku} \t\t N Sensor: {nSensor} \t\t Valor: {valor} \t\t Nombre: {sensor_encontrado.nombre} \t\t Unidad: {sensor_encontrado.unidad}")
-            sensores_vistos.add(sensor_encontrado)
-            guardar_sensor = {
-                    "SKU": tipo,
-                    "N Sensor": nSensor,
-                    "Valor": valor,
-                    "Nombre": sensor_encontrado.nombre,
-                    "Unidad": sensor_encontrado.unidad,
-                    "Fecha": fecha_actual
-                }
-            self.SensorDatos.guardar(guardar_sensor, "Datos.json")
-            
-        return sensor_encontrado if sensor_encontrado else None"""
-        
     def conexion_servidor(self):
         mandarDatos()
         print("Datos enviados al servidor")
-    
-    def distancia(self):
-        #sku = self.SensoresData.obtener_Sensores()
-        sensores_vistos = set()  # Almacena los sensores ya mostrados
 
+    def distancia(self):
         while True:
             data = self.read_sensor('DIS:')
             if data:
@@ -59,23 +33,17 @@ class SensoresArduino:
                 nSensor = data[1]
                 valor = data[2]
                 print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
-                datos =  {
+                datos = {
                     'tipo': tipo,
                     'nSensor': nSensor,
                     'valor': valor
                 }
                 self.datosArduino.crear(datos)
                 self.datosArduino.guardar()
-                
-                #self.buscar_sensor(sku, tipo, sensores_vistos, nSensor, valor)
             else:
                 print("No hay datos disponibles para el sensor de distancia")
-    
 
     def movimiento(self):
-        #sku = self.SensoresData.obtener_Sensores()
-        sensores_vistos = set()  # Almacena los sensores ya mostrados
-
         while True:
             data = self.read_sensor('SM:')
             if data:
@@ -83,29 +51,19 @@ class SensoresArduino:
                 nSensor = data[1]
                 valor = data[2]
                 print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
-                datos =  {
+                datos = {
                     'tipo': tipo,
                     'nSensor': nSensor,
                     'valor': valor
                 }
                 self.datosArduino.crear(datos)
                 self.datosArduino.guardar()
-                #self.buscar_sensor(sku, tipo, sensores_vistos, nSensor, valor)
-                
-                
             else:
                 print("No hay datos disponibles para el sensor de movimiento")
                 time.sleep(5)
-                break 
-        #guardarSensor = sensor_encontrado.Diccionario()
-        #self.SensorDatos.guardar(guardarSensor, "Datos.json")
-        
-
+                break
 
     def humedad(self):
-        #sku = self.SensoresData.obtener_Sensores()
-        sensores_vistos = set()  # Almacena los sensores ya mostrados
-
         while True:
             data = self.read_sensor('SH:')
             if data:
@@ -113,21 +71,17 @@ class SensoresArduino:
                 nSensor = data[1]
                 valor = data[2]
                 print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
-                datos =  {
+                datos = {
                     'tipo': tipo,
                     'nSensor': nSensor,
                     'valor': valor
                 }
                 self.datosArduino.crear(datos)
                 self.datosArduino.guardar()
-                #self.buscar_sensor(sku, tipo, sensores_vistos, nSensor, valor)
             else:
                 print("No hay datos disponibles para el sensor de humedad")
 
     def temperatura(self):
-        #sku = self.SensoresData.obtener_Sensores()
-        sensores_vistos = set()  # Almacena los sensores ya mostrados
-
         while True:
             data = self.read_sensor('ST:')
             if data:
@@ -135,22 +89,17 @@ class SensoresArduino:
                 nSensor = data[1]
                 valor = data[2]
                 print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
-                datos =  {
+                datos = {
                     'tipo': tipo,
                     'nSensor': nSensor,
                     'valor': valor
                 }
                 self.datosArduino.crear(datos)
                 self.datosArduino.guardar()
-                #self.buscar_sensor(sku, tipo, sensores_vistos, nSensor, valor)
             else:
                 print("No hay datos disponibles para el sensor de temperatura")
-    
-    
-    def sonido(self):
-        #sku = self.SensoresData.obtener_Sensores()
-        sensores_vistos = set()  # Almacena los sensores ya mostrados
 
+    def sonido(self):
         while True:
             data = self.read_sensor('SS:')
             if data:
@@ -158,19 +107,15 @@ class SensoresArduino:
                 nSensor = data[1]
                 valor = data[2]
                 print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
-                datos =  {
+                datos = {
                     'tipo': tipo,
                     'nSensor': nSensor,
                     'valor': valor
                 }
                 self.datosArduino.crear(datos)
                 self.datosArduino.guardar()
-                #self.buscar_sensor(sku, tipo, sensores_vistos, nSensor, valor)
             else:
                 print("No hay datos disponibles para el sensor de Sonido")
-
-    
-
 
     def mostrar_menu(self):
         while True:
@@ -184,16 +129,17 @@ class SensoresArduino:
             print("7. Enviar datos al servidor")
             print("8. Salir")
 
-            opcion = input("Ingrese el número del sensor que desea consultar o '8' para salir: ")
+            opcion = input(
+                "Ingrese el número del sensor que desea consultar o '8' para salir: ")
 
             if opcion == '1':
                 self.distancia()
             elif opcion == '2':
-               self.movimiento()
+                self.movimiento()
             elif opcion == '3':
                 self.humedad()
             elif opcion == '4':
-               self.temperatura()
+                self.temperatura()
             elif opcion == '5':
                 self.sonido()
             elif opcion == '6':
@@ -210,10 +156,6 @@ class SensoresArduino:
                 print("Opción no válida. Intente de nuevo.")
 
     def obtener_todos_los_sensores(self):
-        
-        sensores_vistos = set()
-        #sku = self.SensoresData.obtener_Sensores()
-
         tipos_sensores = ['DIS:', 'SM:', 'SH:', 'ST:', 'SS:']
         while True:
             for tipo_sensor in tipos_sensores:
@@ -222,44 +164,26 @@ class SensoresArduino:
                     tipo = datos_sensor[0]
                     nSensor = datos_sensor[1]
                     valor = datos_sensor[2]
-                    print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
-                    datos =  {
-                    'tipo': tipo,
-                    'nSensor': nSensor,
-                    'valor': valor,
-                    
-                }
+                    print(
+                        f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
+                    datos = {
+                        'tipo': tipo,
+                        'nSensor': nSensor,
+                        'valor': valor,
+
+                    }
                 self.datosArduino.crear(datos)
                 self.datosArduino.guardar()
-                    #self.buscar_sensor(sku, tipo, sensores_vistos, nSensor, valor)
 
-
-"""if __name__ == "__main__":
-    conexion_arduino = ConexionArduino()
-    datos = Datos()
-
-    try:
-        sensores = SensoresArduino(conexion_arduino)
-        sensores.obtener_todos_los_sensores()
-        sensores.mostrar_menu()
-        datos.guardar()
-        
-    except KeyboardInterrupt:
-        conexion_arduino.cerrar_conexion()"""
 
 if __name__ == "__main__":
     conexion_arduino = ConexionArduino()
-    datos = Datos()
+    datos = DatosArduino()
 
     try:
-        sensores = SensoresArduino(conexion_arduino)
+        sensores = DatosInterfaz(conexion_arduino)
         sensores.mostrar_menu()
         datos.guardar()
-        
+
     except KeyboardInterrupt:
         conexion_arduino.cerrar_conexion()
-
-
-
-
-
