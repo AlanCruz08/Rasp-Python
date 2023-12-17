@@ -46,9 +46,7 @@ class SensoresArduino:
         
     def conexion_servidor(self):
         mandarDatos()
-
-
-
+        print("Datos enviados al servidor")
     
     def distancia(self):
         #sku = self.SensoresData.obtener_Sensores()
@@ -190,7 +188,6 @@ class SensoresArduino:
 
             if opcion == '1':
                 self.distancia()
-                
             elif opcion == '2':
                self.movimiento()
             elif opcion == '3':

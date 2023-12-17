@@ -1,6 +1,8 @@
 from listaMetodos import Lista
 from Json import exportarJson
 import datetime
+import requests
+from servidor import mandarDatos
 
 class Datos(Lista):
     def __init__(self,tipo="", nSensor="", valor= ""):
@@ -17,8 +19,28 @@ class Datos(Lista):
             return f'Contiene {len(self.lista)} elementos'
         return f'{str(self.tipo).ljust(5)} \t\t\t| {self.nSensor.ljust(5)} \t\t\t| {self.valor.ljust(5)}'
 
+    """def guardar(self):
+        exportarJson.guardar(self.Diccionario(),self.archivo)"""
+
     def guardar(self):
-        exportarJson.guardar(self.Diccionario(),self.archivo)
+        # Verifica si está conectado a internet
+        if is_connected_to_internet():
+            # Si está conectado, envía los datos al servidor
+            mandarDatos()
+            # Limpia la clase Datos.json
+            exportarJson.guardar([], self.archivo)
+        else:
+            # Simplemente acumula la información en el JSON
+            exportarJson.guardar(self.Diccionario(), self.archivo)
+
+    def is_connected_to_internet(self):
+        try:
+            # Intenta hacer una solicitud a google.com
+            requests.get('http://google.com')
+            return True
+        except requests.exceptions.RequestException as e:
+            # Si hay un error, no hay conexión a internet
+            return False
              
     
     #def convertirJson(self,lista):
