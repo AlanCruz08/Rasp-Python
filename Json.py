@@ -2,6 +2,7 @@ import json
 
 
 class ClssJson:
+    
     def guardar(datos_nuevos, nombre_archivo="archivo.json"):
         datos_existen = []
 

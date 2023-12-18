@@ -1,5 +1,5 @@
 from lista import Lista
-from Json import exportarJson
+from Json import ClssJson
 import datetime
 import requests
 from servidor import mandarDatos
@@ -19,11 +19,11 @@ class DatosArduino(Lista):
         return f'{str(self.tipo).ljust(5)} \t\t\t| {self.nSensor.ljust(5)} \t\t\t| {self.valor.ljust(5)}'
 
     def guardar(self):
-        exportarJson.guardar(self.Diccionario(), self.archivo)
+        ClssJson.guardar(self.Diccionario(), self.archivo)
 
         if self.is_connected_to_internet():
             mandarDatos()
-            exportarJson.guardar([], self.archivo)
+            ClssJson.guardar([], self.archivo)
 
     def is_connected_to_internet(self):
         try:
