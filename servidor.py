@@ -2,18 +2,15 @@ import json
 import requests
 
 
-def mandarDatos():
-    json_file_path = 'Datos.json'
+def mandarDatos(datos):
+    #json_data = json.load(datos)
 
-    with open(json_file_path, 'r') as file:
-        json_data = json.load(file)
-
-    api_url = "http://3.129.244.114/api/carga"
+    # api_url = "http://3.129.244.114/api/carga"
     # conexion api local
-    # api_url = "http://127.0.0.1:8000/api/carga"
+    api_url = "http://127.0.0.1:8000/api/carga"
 
     try:
-        response = requests.post(api_url, json=json_data)
+        response = requests.post(api_url, json=datos)
         # Verifica si la solicitud fue exitosa (código de estado 2xx)
         if response.status_code // 100 == 2:
             print("Datos enviados al servidor")
@@ -24,6 +21,3 @@ def mandarDatos():
     except requests.exceptions.RequestException as e:
         print(f"Error de solicitud: {e}")
 
-
-if __name__ == '__main__':
-    mandarDatos()

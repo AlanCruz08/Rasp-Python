@@ -1,8 +1,6 @@
 from lista import Lista
 from Json import ClssJson
 import datetime
-import requests
-from servidor import mandarDatos
 
 
 class DatosArduino(Lista):
@@ -20,17 +18,6 @@ class DatosArduino(Lista):
 
     def guardar(self):
         ClssJson.guardar(self.Diccionario(), self.archivo)
-
-        if self.is_connected_to_internet():
-            mandarDatos()
-            ClssJson.guardar([], self.archivo)
-
-    def is_connected_to_internet(self):
-        try:
-            requests.get('http://google.com')
-            return True
-        except requests.exceptions.RequestException as e:
-            return False
 
     def Diccionario(self):
         diccionario_datos = []
