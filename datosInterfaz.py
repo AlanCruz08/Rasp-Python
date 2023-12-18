@@ -2,6 +2,7 @@ from conexion import ConexionArduino
 from datosArduino import DatosArduino
 from servidor import mandarDatos
 import time
+import threading
 
 
 class DatosInterfaz:
@@ -60,23 +61,27 @@ class DatosInterfaz:
 
     def obtener_todos_los_sensores(self):
         tipos_sensores = ['DIS:', 'SM:', 'SH:', 'ST:', 'SS:']
-        while True:
-            for tipo_sensor in tipos_sensores:
-                datos_sensor = self.read_sensor(tipo_sensor)
-                if datos_sensor:
-                    tipo = datos_sensor[0]
-                    nSensor = datos_sensor[1]
-                    valor = datos_sensor[2]
-                    print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
-                    datos = {
-                        'tipo': tipo,
-                        'nSensor': nSensor,
-                        'valor': valor,
-                    }
-
-                self.datosArduino.crear(datos)
+        stop = False
+        try:
+            while not stop:
+                for tipo_sensor in tipos_sensores:
+                    datos_sensor = self.read_sensor(tipo_sensor)
+                    if datos_sensor:
+                        tipo = datos_sensor[0]
+                        nSensor = datos_sensor[1]
+                        valor = datos_sensor[2]
+                        print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
+                        datos = {
+                            'tipo': tipo,
+                            'nSensor': nSensor,
+                            'valor': valor,
+                        }
+                        self.datosArduino.crear(datos)
                 self.datosArduino.guardar()
-    
+                time.sleep(10)
+        except KeyboardInterrupt:
+            print("Interrupción del teclado detectada. Saliendo del bucle...")
+
     def distancia(self):
         while True:
             data = self.read_sensor('DIS:')
@@ -177,7 +182,7 @@ if __name__ == "__main__":
     try:
         sensores = DatosInterfaz(conexion_arduino)
         sensores.mostrar_menu()
-        datos.guardar()
+        # datos.guardar()
 
     except KeyboardInterrupt:
         conexion_arduino.cerrar_conexion()

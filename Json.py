@@ -1,27 +1,46 @@
 import json
 import requests
+from datetime import datetime
 from servidor import mandarDatos
-
 
 class ClssJson:
 
     def guardar(datos_nuevos, nombre_archivo="Datos.json"):
+        datos_existen = []
+        
         try:
             with open(nombre_archivo, 'r') as archivo:
                 datos_existen = json.load(archivo)
-        except FileNotFoundError:
-            datos_existen = []
+        except Exception as e:
+            print(f"Error al leer el archivo {nombre_archivo}: {e}")
 
-        if not datos_existen and ClssJson.is_connected_to_internet():
-            mandarDatos(datos_existen)
-            datos_existen = []
+        for dato_nuevo in datos_nuevos:
+            fecha_nueva = datetime.strptime(dato_nuevo['fecha'], '%Y-%m-%d %H:%M:%S')
+            tipo_nuevo = dato_nuevo['tipo']
+            nSensor_nuevo = dato_nuevo['nSensor']
 
-        datos_existen.extend(datos_nuevos)
+            # Verificar si hay un elemento existente con la misma fecha, tipo y sensor
+            duplicado = any(
+                datetime.strptime(dato_existente['fecha'], '%Y-%m-%d %H:%M:%S') == fecha_nueva
+                and dato_existente['tipo'] == tipo_nuevo
+                and dato_existente['nSensor'] == nSensor_nuevo
+                for dato_existente in datos_existen
+            )
+
+            # Si no es un duplicado, agregarlo
+            if not duplicado:
+                datos_existen.append(dato_nuevo)
 
         with open(nombre_archivo, 'w') as archivo:
             json.dump(datos_existen, archivo, indent=4)
+        conectado = ClssJson.is_connected_to_internet()
 
-    def is_connected_to_internet(self):
+        if conectado:
+            mandarDatos(datos_existen)
+            with open(nombre_archivo, 'w') as archivo:
+                json.dump([], archivo)
+
+    def is_connected_to_internet():
         try:
             requests.get('http://google.com')
             return True

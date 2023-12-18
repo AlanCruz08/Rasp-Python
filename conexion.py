@@ -2,7 +2,7 @@ import serial
 
 
 class ConexionArduino:
-    def __init__(self, arduino_port='/dev/ttyACM0', baud_rate=9600):
+    def __init__(self, arduino_port='COM3', baud_rate=9600):
         self.ser = serial.Serial(arduino_port, baud_rate, timeout=1)
 
     def leer_dato(self):
