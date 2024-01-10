@@ -1,7 +1,5 @@
 from lista import Lista
 from Json import ClssJson
-import datetime
-
 
 class DatosArduino(Lista):
     def __init__(self, tipo="", nSensor="", valor=""):
@@ -21,31 +19,14 @@ class DatosArduino(Lista):
 
     def Diccionario(self):
         diccionario_datos = []
-        fecha_datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
+        
         for sensor in self.lista:
-            datos_sensor = sensor.get('datos', [])
-            valor_existente = None
-
-            for dato in datos_sensor:
-                if dato['fecha'] == fecha_datetime:
-                    valor_existente = dato['valor']
-                    break
-
-            if valor_existente is not None:
-                diccionario_sensor = {
-                    'tipo': sensor.get('tipo'),
-                    'nSensor': sensor.get('nSensor'),
-                    'valor': valor_existente,
-                    'fecha': fecha_datetime
-                }
-            else:
-                diccionario_sensor = {
-                    'tipo': sensor.get('tipo'),
-                    'nSensor': sensor.get('nSensor'),
-                    'valor': sensor.get('valor'),
-                    'fecha': fecha_datetime
-                }
+            diccionario_sensor = {
+                'tipo': sensor.get('tipo'),
+                'nSensor': sensor.get('nSensor'),
+                'valor': sensor.get('valor'),
+                'fecha': sensor.get('fecha')
+            }
             diccionario_datos.append(diccionario_sensor)
         return diccionario_datos
 

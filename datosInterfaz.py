@@ -2,6 +2,7 @@ from conexion import ConexionArduino
 from datosArduino import DatosArduino
 from servidor import mandarDatos
 import time
+import datetime
 import threading
 
 
@@ -70,11 +71,13 @@ class DatosInterfaz:
                         tipo = datos_sensor[0]
                         nSensor = datos_sensor[1]
                         valor = datos_sensor[2]
+                        fecha_datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                         print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
                         datos = {
                             'tipo': tipo,
                             'nSensor': nSensor,
                             'valor': valor,
+                            'fecha': fecha_datetime
                         }
                         self.datosArduino.crear(datos)
                 self.datosArduino.guardar()
