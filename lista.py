@@ -36,3 +36,6 @@ class Lista:
             return self.lista[index - 1]
         else:
             return None
+        
+    def vaciar(self):
+        self.lista.clear()

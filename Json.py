@@ -2,7 +2,7 @@ import json
 import requests
 from datetime import datetime
 from servidor import mandarDatos
-from lista import Lista
+from lista import vaciar
 
 class ClssJson:
 
@@ -39,9 +39,7 @@ class ClssJson:
 
         if conectado:
             mandarDatos(datos_existen)
-            for element in Lista.lista:
-                print(element)
-                Lista.lista.remove(element)
+            vaciar()
             with open(nombre_archivo, 'w') as archivo:
                 json.dump([], archivo)
 
