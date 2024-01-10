@@ -5,9 +5,9 @@ import requests
 def mandarDatos(datos):
     #json_data = json.load(datos)
 
-    api_url = "http://3.129.244.114/api/carga"
+    api_url = "http://18.117.124.234/api/carga"
     # conexion api local
-    # api_url = "http://127.0.0.1:8000/api/carga"
+    #api_url = "http://127.0.0.1:8000/api/carga"
 
     try:
         response = requests.post(api_url, json=datos)

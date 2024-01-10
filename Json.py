@@ -24,6 +24,7 @@ class ClssJson:
                 datetime.strptime(dato_existente['fecha'], '%Y-%m-%d %H:%M:%S') == fecha_nueva
                 and dato_existente['tipo'] == tipo_nuevo
                 and dato_existente['nSensor'] == nSensor_nuevo
+                and dato_existente['valor'] == dato_nuevo['valor']
                 for dato_existente in datos_existen
             )
 
