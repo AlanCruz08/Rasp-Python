@@ -1,8 +1,6 @@
 from lista import Lista
 from Json import ClssJson
 
-
-
 class DatosArduino(Lista):
     def __init__(self, tipo="", nSensor="", valor=""):
         super().__init__()

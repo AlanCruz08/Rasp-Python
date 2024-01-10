@@ -30,7 +30,7 @@ class ClssJson:
             )
 
             # Si no es un duplicado, agregarlo
-            if duplicado is False:
+            if duplicado is True:
                 datos_existen.append(dato_nuevo)
 
         with open(nombre_archivo, 'w') as archivo:
@@ -39,7 +39,6 @@ class ClssJson:
 
         if conectado:
             mandarDatos(datos_existen)
-            Lista.vaciar()
             with open(nombre_archivo, 'w') as archivo:
                 json.dump([], archivo)
 

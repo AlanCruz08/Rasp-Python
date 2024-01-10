@@ -81,6 +81,7 @@ class DatosInterfaz:
                         }
                         self.datosArduino.crear(datos)
                 self.datosArduino.guardar()
+                self.datosArduino.vaciar()
                 time.sleep(10)
         except KeyboardInterrupt:
             print("Interrupción del teclado detectada. Saliendo del bucle...")
