@@ -21,13 +21,18 @@ class DatosArduino(Lista):
         diccionario_datos = []
         
         for sensor in self.lista:
-            diccionario_sensor = {
-                'tipo': sensor.get('tipo'),
-                'nSensor': sensor.get('nSensor'),
-                'valor': sensor.get('valor'),
-                'fecha': sensor.get('fecha')
-            }
-            diccionario_datos.append(diccionario_sensor)
+            fecha = sensor.get('fecha')
+            tipo = sensor.get('tipo')
+            sensor_existente = next((sensor for sensor in self.lista if sensor['tipo'] == tipo and sensor['fecha'] == fecha), None)
+
+            if sensor_existente is None:
+                diccionario_sensor = {
+                    'tipo': sensor.get('tipo'),
+                    'nSensor': sensor.get('nSensor'),
+                    'valor': sensor.get('valor'),
+                    'fecha': sensor.get('fecha')
+                }
+                diccionario_datos.append(diccionario_sensor)
         return diccionario_datos
 
 
