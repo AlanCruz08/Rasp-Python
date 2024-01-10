@@ -1,6 +1,8 @@
 from lista import Lista
 from Json import ClssJson
 
+
+
 class DatosArduino(Lista):
     def __init__(self, tipo="", nSensor="", valor=""):
         super().__init__()
@@ -21,18 +23,18 @@ class DatosArduino(Lista):
         diccionario_datos = []
         
         for sensor in self.lista:
-            fecha = sensor.get('fecha')
-            tipo = sensor.get('tipo')
-            sensor_existente = next((sensor for sensor in self.lista if sensor['tipo'] == tipo and sensor['fecha'] == fecha), None)
+            # Comprobamos si el sensor ya existe en la lista
+            if sensor in diccionario_datos:
+                continue
 
-            if sensor_existente is None:
-                diccionario_sensor = {
-                    'tipo': sensor.get('tipo'),
-                    'nSensor': sensor.get('nSensor'),
-                    'valor': sensor.get('valor'),
-                    'fecha': sensor.get('fecha')
-                }
-                diccionario_datos.append(diccionario_sensor)
+            diccionario_sensor = {
+                'tipo': sensor.get('tipo'),
+                'nSensor': sensor.get('nSensor'),
+                'valor': sensor.get('valor'),
+                'fecha': sensor.get('fecha'),
+            }
+            diccionario_datos.append(diccionario_sensor)
+
         return diccionario_datos
 
 
