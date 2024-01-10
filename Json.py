@@ -29,7 +29,7 @@ class ClssJson:
             )
 
             # Si no es un duplicado, agregarlo
-            if not duplicado:
+            if duplicado is False:
                 datos_existen.append(dato_nuevo)
 
         with open(nombre_archivo, 'w') as archivo:

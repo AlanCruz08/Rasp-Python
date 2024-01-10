@@ -23,10 +23,6 @@ class DatosArduino(Lista):
         diccionario_datos = []
         
         for sensor in self.lista:
-            # Comprobamos si el sensor ya existe en la lista
-            if sensor in diccionario_datos:
-                continue
-
             diccionario_sensor = {
                 'tipo': sensor.get('tipo'),
                 'nSensor': sensor.get('nSensor'),
@@ -34,10 +30,7 @@ class DatosArduino(Lista):
                 'fecha': sensor.get('fecha'),
             }
             diccionario_datos.append(diccionario_sensor)
-        for objeto in self.lista:
-            self.lista.remove(objeto)
-            
-        print(self.lista)
+
         return diccionario_datos
 
 

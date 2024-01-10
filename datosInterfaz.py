@@ -72,7 +72,7 @@ class DatosInterfaz:
                         nSensor = datos_sensor[1]
                         valor = datos_sensor[2]
                         fecha_datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                        print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}")
+                        print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}, Fecha: {fecha_datetime}")
                         datos = {
                             'tipo': tipo,
                             'nSensor': nSensor,
