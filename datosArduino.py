@@ -34,7 +34,10 @@ class DatosArduino(Lista):
                 'fecha': sensor.get('fecha'),
             }
             diccionario_datos.append(diccionario_sensor)
-
+        for objeto in self.lista:
+            self.lista.remove(objeto)
+            
+        print(self.lista)
         return diccionario_datos
 
 
