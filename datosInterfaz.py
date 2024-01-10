@@ -3,7 +3,6 @@ from datosArduino import DatosArduino
 from servidor import mandarDatos
 import time
 import datetime
-import threading
 
 
 class DatosInterfaz:
@@ -22,10 +21,6 @@ class DatosInterfaz:
                     else:
                         print(
                             f"Error: Datos incompletos recibidos para {sensor}")
-
-    def conexion_servidor(self):
-        mandarDatos()
-        print("Datos enviados al servidor")
 
     def mostrar_menu(self):
         while True:
@@ -72,7 +67,7 @@ class DatosInterfaz:
                         nSensor = datos_sensor[1]
                         valor = datos_sensor[2]
                         fecha_datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                        print(f"tipo: {tipo}, N° sensor: {nSensor}, Valor: {valor}, Fecha: {fecha_datetime}")
+                        print(f"Tipo: {tipo}, \tValor: {valor}, \tFecha: {fecha_datetime}")
                         datos = {
                             'tipo': tipo,
                             'nSensor': nSensor,
@@ -186,7 +181,6 @@ if __name__ == "__main__":
     try:
         sensores = DatosInterfaz(conexion_arduino)
         sensores.mostrar_menu()
-        # datos.guardar()
 
     except KeyboardInterrupt:
         conexion_arduino.cerrar_conexion()

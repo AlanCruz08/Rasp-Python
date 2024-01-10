@@ -1,10 +1,7 @@
-import json
 import requests
 
 
 def mandarDatos(datos):
-    #json_data = json.load(datos)
-
     api_url = "http://18.117.124.234/api/carga"
     # conexion api local
     #api_url = "http://127.0.0.1:8000/api/carga"

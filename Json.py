@@ -2,7 +2,6 @@ import json
 import requests
 from datetime import datetime
 from servidor import mandarDatos
-from lista import Lista
 
 class ClssJson:
 
@@ -16,21 +15,17 @@ class ClssJson:
             print(f"Error al leer el archivo {nombre_archivo}: {e}")
 
         for dato_nuevo in datos_nuevos:
-            fecha_nueva = datetime.strptime(dato_nuevo['fecha'], '%Y-%m-%d %H:%M:%S')
-            tipo_nuevo = dato_nuevo['tipo']
-            nSensor_nuevo = dato_nuevo['nSensor']
-
             # Verificar si hay un elemento existente con la misma fecha, tipo y sensor
             duplicado = any(
-                datetime.strptime(dato_existente['fecha'], '%Y-%m-%d %H:%M:%S') == fecha_nueva
-                and dato_existente['tipo'] == tipo_nuevo
-                and dato_existente['nSensor'] == nSensor_nuevo
+                datetime.strptime(dato_existente['fecha'], '%Y-%m-%d %H:%M:%S') == datetime.strptime(dato_nuevo['fecha'], '%Y-%m-%d %H:%M:%S')
+                and dato_existente['tipo'] == dato_nuevo['tipo']
+                and dato_existente['nSensor'] == dato_nuevo['nSensor']
                 and dato_existente['valor'] == dato_nuevo['valor']
                 for dato_existente in datos_existen
             )
 
             # Si no es un duplicado, agregarlo
-            if duplicado is True:
+            if duplicado is False:
                 datos_existen.append(dato_nuevo)
 
         with open(nombre_archivo, 'w') as archivo:
@@ -53,8 +48,3 @@ class ClssJson:
         with open(nombreArchivo, 'r') as archivo:
             diccionario = json.load(archivo)
         return diccionario
-
-
-if __name__ == '__main__':
-    clss = ClssJson()
-    clss.guardar()

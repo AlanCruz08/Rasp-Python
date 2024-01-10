@@ -22,16 +22,11 @@ class DatosArduino(Lista):
         
         for sensor in self.lista:
             diccionario_sensor = {
-                'tipo': sensor.get('tipo'),
-                'nSensor': sensor.get('nSensor'),
-                'valor': sensor.get('valor'),
-                'fecha': sensor.get('fecha'),
+                'tipo': sensor['tipo'],
+                'nSensor': sensor['nSensor'],
+                'valor': sensor['valor'],
+                'fecha': sensor['fecha'],
             }
             diccionario_datos.append(diccionario_sensor)
 
         return diccionario_datos
-
-
-if __name__ == '__main__':
-    DatosL = DatosArduino()
-    DatosL.guardar()
